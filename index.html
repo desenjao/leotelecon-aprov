@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Página Inicial - Léo Telecom</title>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="nav-content">
+            <div class="location-current">
+              
+                <br>
+                <span id="localidade"></span>
+            </div>
+            <a href="locais.html" class="location-change">
+               
+                
+                <span>Escolha outra região</span>
+                
+            </a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <img src="logo.png" alt="" style="width: 30vw; border-radius: 50%;">
+          <h1>Internet rápida e confiável, onde você estiver!</h1>
+          <p>Conectamos sua casa no interior com internet de alta qualidade via fibra ou antena. Com energia elétrica ou solar, a Leo Telecom leva conexão até você!</p>
+          <a href="#contato" class="btn">Quero minha internet agora!</a>
+          <p></p>
+        </div>
+      </header>
+    
+      <!-- Seção de Benefícios -->
+      <section id="beneficios" class="section">
+        <h2>Por que escolher a Leo Telecom?</h2>
+        <div class="benefits">
+          <div class="benefit">
+            <span class="icon">✅</span>
+            <p>Internet onde ninguém chega</p>
+          </div>
+          <div class="benefit">
+            <span class="icon">✅</span>
+            <p>Planos via antena e fibra</p>
+          </div>
+          <div class="benefit">
+            <span class="icon">✅</span>
+            <p>Internet para Energia elétrica e solar</p>
+          </div>
+          <div class="benefit">
+            <span class="icon">✅</span>
+            <p>Instalação rápida</p>
+          </div>
+          <div class="benefit">
+            <span class="icon">✅</span>
+            <p>Atendimento humanizado</p>
+          </div>
+        </div>
+      </section>
+    
+      <!-- Seção de Depoimentos -->
+      <section id="depoimentos" class="section">
+        <h2>Clientes Felizes</h2>
+        <div class="testimonials">
+          <div class="testimonial">
+            <p>"Moro no interior e achava impossível ter internet boa. A Leo Telecom resolveu meu problema!"</p>
+            <h4>João S.</h4>
+          </div>
+          <div class="testimonial">
+            <p>"Agora faço videochamadas sem travar, mesmo morando longe da cidade!"</p>
+            <h4>Maria R.</h4>
+          </div>
+        </div>
+      </section>
+    
+      <!-- Seção de Planos -->
+      <section id="planos" class="section">
+        <h2>Nossos Planos</h2>
+        <div class="plans">
+          <div class="plan">
+            <h3>Plano Antena</h3>
+            <p>Internet via rádio para áreas sem fibra.</p>
+            <a href="#contato" class="btn">Saiba Mais</a>
+          </div>
+          <div class="plan">
+            <h3>Plano Fibra</h3>
+            <p>Conexão ultrarrápida onde há cobertura.</p>
+            <a href="#contato" class="btn">Saiba Mais</a>
+          </div>
+          <div class="plan">
+            <h3>Plano Solar</h3>
+            <p>Opção para quem não tem energia elétrica constante.</p>
+            <a href="#contato" class="btn">Saiba Mais</a>
+          </div>
+        </div>
+      </section>
+    
+      <!-- Seção Como Funciona -->
+      <section id="como-funciona" class="section">
+        <h2>Como Funciona?</h2>
+        <div class="steps">
+          <div class="step">
+            <h3>1. Escolha seu plano</h3>
+            <p>Selecione a melhor opção para sua necessidade.</p>
+          </div>
+          <div class="step">
+            <h3>2. Instalação Rápida</h3>
+            <p>Nossa equipe instala a conexão na sua casa.</p>
+          </div>
+          <div class="step">
+            <h3>3. Conexão Online</h3>
+            <p>Pronto! Você já está online com a Leo Telecom.</p>
+          </div>
+        </div>
+      </section>
+    
+      <!-- Seção FAQ -->
+      <section id="faq" class="section">
+        <h2>Perguntas Frequentes</h2>
+        <div class="faq-item">
+          <h3>Quanto tempo leva para instalar?</h3>
+          <p>Em média, X dias.</p>
+        </div>
+        <div class="faq-item">
+          <h3>A internet funciona em dias de chuva?</h3>
+          <p>Sim, garantimos estabilidade.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Quais as formas de pagamento?</h3>
+          <p>Aceitamos boleto, Pix e cartão.</p>
+        </div>
+      </section>
+    
+      <!-- Seção de Contato/CTA Final -->
+      <section id="contato" class="contact section">
+        <h2>Não fique sem internet!</h2>
+        <p>Conectamos você ainda esta semana!</p>
+        <a href="https://wa.me/+5589981118645?text=Ol%C3%A1%20gostaria%20de%20saber%20como%20fa%C3%A7o%20para%20ter%20internet%20na%20minha%20resid%C3%AAncia%3F" class="btn">Fale com a gente agora!</a>
+      </section>
+    
+      <!-- Rodapé -->
+      <footer>
+        <p>© 2025 Leo Telecom - Todos os direitos reservados.</p>
+      </footer> 
+
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const localidade = getQueryParam("localidade");
+            if (localidade) {
+                document.getElementById("localidade").textContent = `Localidade selecionada: ${localidade}`;
+                document.getElementById("current-location").textContent = localidade;
+            } else {
+                document.getElementById("localidade").textContent = "Nenhuma localidade selecionada.";
+            }
+        });
+    </script>
+</body>
+</html>
+

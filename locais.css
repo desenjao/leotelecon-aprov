@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #000033;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+div.container{
+    margin-top: 100px;
+    display: flex;
+    align-items: center;
+}
+.logo{
+   border-radius: 50%;
+
+   
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.left-content {
+    text-align: center;
+}
+
+.logo {
+    max-width: 150px;
+   
+}
+
+.promo-image {
+    max-width: 250px;
+    margin: 20px auto;
+}
+
+.right-content {
+    width: 100%;
+}
+
+.locations-title {
+    text-align: center;
+    font-size: 22px;
+}
+
+.city-button {
+    background-color: transparent;
+    border: 2px solid #ff6600;
+    color: white;
+    padding: 12px 20px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    position: relative;
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
+
+.city-button:hover {
+    background-color: rgba(255, 102, 0, 0.1);
+}
+
+.city-button::after {
+    content: '+';
+    position: absolute;
+    right: 20px;
+}
+
+.city-button.active::after {
+    content: '-';
+}
+
+.localities {
+    display: none;
+    padding: 10px 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.localities.active {
+    display: block;
+}
+
+.localities ul {
+    list-style: none;
+    padding-left: 10px;
+}
+
+.localities ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.localities ul li a:hover {
+    text-decoration: underline;
+}
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    max-width: 1200px;
+    justify-content: center;
+}
+.button-container a {
+    text-decoration: none;
+    width: 100%;
+    max-width: 300px;
+}
+.city-button {
+    background-color: transparent;
+    border: 2px solid #ff6600;
+    color: white;
+    padding: 12px 20px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    position: relative;
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
+.city-button:hover {
+    background-color: rgba(255, 102, 0, 0.1);
+}

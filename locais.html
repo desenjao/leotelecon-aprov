@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="locais.css">
+    <title>Locais - Léo Telecom</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center; margin-top: 50px;">locais de atendimento</h1>
+    <div class="container">
+        <div class="left-content">
+
+            <img src="logo.png" alt="Léo Telecom" class="logo">
+
+
+            <div class="promo-content">
+
+                <h2>Aproveite o melhor da Internet na sua casa com Léo Telecom a qualquer hora!</h2>
+            </div>
+        </div>
+        <div class="right-content">
+            <h1 class="locations-title">Escolha sua região</h1>
+            <div class="location-list">
+                <br>
+                <button class="city-button">Coronel José Dias</button>
+                <div class="localities">
+                    <ul>
+                        <button class="city-button" onclick="redirectToIndex('Barro Vermelho')">Barro Vermelho</button>
+                        <button class="city-button" onclick="redirectToIndex('Barra do Campestre')">Barra do
+                            Campestre</button>
+                        <button class="city-button" onclick="redirectToIndex('Bendó')">Bendó</button>
+                        <button class="city-button" onclick="redirectToIndex('Cacimba de Baixo')">Cacimba de
+                            Baixo</button>
+                        <button class="city-button" onclick="redirectToIndex('Curral de Ramos')">Curral de
+                            Ramos</button>
+                        <button class="city-button" onclick="redirectToIndex('Lages de Pedra')">Lages de Pedra</button>
+                        <button class="city-button" onclick="redirectToIndex('Salininha')">Salininha</button>
+                        <button class="city-button" onclick="redirectToIndex('Santa Tereza')">Santa Tereza</button>
+                        <button class="city-button" onclick="redirectToIndex('Riacho da Jurema')">Riacho da
+                            Jurema</button>
+                        <button class="city-button" onclick="redirectToIndex('Vereda')">Vereda</button>
+                        <button class="city-button" onclick="redirectToIndex('Áreas próximas - Coronel José Dias')">Áreas próximas - Coronel José Dias</button>
+                    </ul>
+                </div>
+
+                <button class="city-button">Dirceu Arcoverde</button>
+                <div class="localities">
+                    <ul>
+
+
+                        <button class="city-button" onclick="redirectToIndex('Descanso')">Descanso</button>
+                        <button class="city-button" onclick="redirectToIndex('Frade')">Frade</button>
+                        <button class="city-button" onclick="redirectToIndex('Lagoinhas')">Lagoinhas</button>
+                        <button class="city-button" onclick="redirectToIndex('Maracá')">Maracá</button>
+                        <button class="city-button" onclick="redirectToIndex('Maxixeiro')">Maxixeiro</button>
+                        <button class="city-button" onclick="redirectToIndex('Minador')">Minador</button>
+                        <button class="city-button" onclick="redirectToIndex('Salgada')">Salgada</button>
+                        <button class="city-button" onclick="redirectToIndex('Santa Cruz')">Santa Cruz</button>
+                        <button class="city-button" onclick="redirectToIndex('Tanque Novo')">Tanque Novo</button>
+                        <button class="city-button" onclick="redirectToIndex('Tigre')">Tigre</button>
+                        <button class="city-button" onclick="redirectToIndex('Raimundão')">Raimundão</button>
+                        <button class="city-button" onclick="redirectToIndex('Áreas próximas - Dirceu Arco Verde')">Áreas próximas - Dirceu Arco Verde</button>
+                    </ul>
+                </div>
+
+                <button class="city-button">São Lourenço</button>
+                <div class="localities">
+                    <ul>
+                        <button class="city-button" onclick="redirectToIndex('Angico Torto')">Angico Torto</button>
+                        <button class="city-button" onclick="redirectToIndex('Cavaleiro')">Cavaleiro</button>
+                        <button class="city-button" onclick="redirectToIndex('Cacimba dos Motas')">Cacimba dos Motas</button>
+                        <button class="city-button" onclick="redirectToIndex('Lagoinha')">Lagoinha</button>
+                        <button class="city-button" onclick="redirectToIndex('Lagoa das Lages')">Lagoa das Lages</button>
+                        <button class="city-button" onclick="redirectToIndex('Lagoa do Meio')">Lagoa do Meio</button>
+                        <button class="city-button" onclick="redirectToIndex('Lagoa dos Porcos')">Lagoa dos Porcos</button>
+                        <button class="city-button" onclick="redirectToIndex('Poço dos Pereira')">Poço dosPereira</button>
+                        <button class="city-button" onclick="redirectToIndex('São José')">São José</button>
+                        <button class="city-button" onclick="redirectToIndex('Teobaldo')">Teobaldo</button>
+                        <button class="city-button" onclick="redirectToIndex('Vereda do Caldeirãozinho')">Vereda do Caldeirãozinho</button>
+                        <button class="city-button" onclick="redirectToIndex('Áreas próximas - São Lourenço')">Áreas próximas - São Lourenço</button>
+                    </ul>
+                </div>
+
+                <button class="city-button">Dom Inocêncio</button>
+                <div class="localities">
+                    <ul>
+                        <button class="city-button" onclick="redirectToIndex('Cabano')">Cabano</button>
+                        <button class="city-button" onclick="redirectToIndex('São Gonçalo')">São Gonçalo</button>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.city-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const localities = button.nextElementSibling;
+                const isActive = localities.classList.contains('active');
+
+                document.querySelectorAll('.localities').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.city-button').forEach(btn => btn.classList.remove('active'));
+
+                if (!isActive) {
+                    localities.classList.add('active');
+                    button.classList.add('active');
+                }
+            });
+        });
+        function redirectToIndex(localidade) {
+            window.location.href = `index.html?localidade=${encodeURIComponent(localidade)}`;
+        }
+    </script>
+</body>
+
+</html>
