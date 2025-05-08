@@ -1,142 +1,13 @@
-html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Leo Telecon - Revolução Digital</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leo Telecon - A Revolução Digital</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
         
         :root {
-            --leo-blue: #0066ff;
-            --leo-dark: #070d1a;
-            --leo-darker: #040813;
-            --leo-gradient: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            font-size: min(max(12px, 2vw), 16px);
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: var(--leo-darker);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
-            touch-action: pan-y;
-        }
-        
-        .super-carousel {
-            position: relative;
-            width: 90vw;
-            height: 90vh;
-            max-width: 414px;
-            max-height: 896px;
-            border-radius: 40px;
-            overflow: hidden;
-            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(0, 102, 255, 0.2);
-            will-change: transform;
-        }
-        
-        .film-wrapper {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            perspective: 1200px;
-        }
-        
-        .film-strip {
-            display: flex;
-            width: 500%;
-            height: 100%;
-            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
-        }
-        
-        .frame {
-            position: relative;
-            width: 20%;
-            height: 100%;
-            overflow: hidden;
-            background: var(--leo-dark);
-            will-change: transform;
-            backface-visibility: hidden;
-        }
-        
-        .frame::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1;
-        }
-        
-        .frame-content {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            padding: 5% 8%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            z-index: 2;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 1s cubic-bezier(0.77, 0, 0.175, 1) 0.3s;
-            padding: env(safe-area-inset-top) env(safe-area-inset-right) 
-                     env(safe-area-inset-bottom) env(safe-area-inset-left);
-        }
-        
-        .frame-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.4) contrast(1.2);
-            transform: scale(1.1);
-            transition: transform 8s linear, filter 1s ease;
-        }
-        
-        /* Media Queries */
-        @media (max-width: 768px) {
-            h1 { font-size: 5.5vw; }
-            p { font-size: 3.5vw; line-height: 1.5; }
-            .btn { padding: 3.5vw 7vw; font-size: 4vw; }
-            .icon-wrapper { 
-                width: 22vw; 
-                height: 22vw;
-                margin-bottom: 5vh;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .super-carousel {
-                border-radius: 20px;
-                width: 95vw;
-                height: 95vh;
-            }
-            .frame-content {
-                padding: 5% 6%;
-            }
-        }
-        
-        /* Restante do CSS permanece igual */
-        /* ... (incluir todo o restante do CSS anterior) ... */ :root {
             --leo-blue: #0066ff;
             --leo-dark: #070d1a;
             --leo-darker: #040813;
@@ -214,7 +85,7 @@ html
             position: relative;
             width: 100%;
             height: 100%;
-            padding: 40px;
+            padding: 40px 40px 100px; /* Aumentei o padding inferior para os botões */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -272,6 +143,7 @@ html
             justify-content: center;
             align-items: center;
             text-align: center;
+            padding-bottom: 20px; /* Adicionei espaço extra */
         }
         
         .icon-wrapper {
@@ -282,7 +154,7 @@ html
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px; /* Reduzi um pouco o margin */
             box-shadow: 0 10px 30px rgba(0, 102, 255, 0.5);
             transform: scale(0);
             transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s;
@@ -311,18 +183,22 @@ html
             font-size: 18px;
             color: rgba(255, 255, 255, 0.8);
             line-height: 1.6;
-            margin-bottom: 40px;
+            margin-bottom: 30px; /* Reduzi o margin */
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
         }
         
         .frame-footer {
             width: 100%;
+            position: absolute;
+            bottom: 40px; /* Posicionamento fixo na parte inferior */
+            left: 0;
+            padding: 0 40px;
         }
         
         .indicators {
             display: flex;
             justify-content: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         
         .indicator {
@@ -371,6 +247,7 @@ html
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            min-height: 60px; /* Altura mínima para melhor toque */
         }
         
         .btn::after {
@@ -428,6 +305,54 @@ html
             25% { transform: translate(20px, 20px); }
             50% { transform: translate(-20px, 10px); }
             75% { transform: translate(10px, -20px); }
+        }
+
+        /* Adicionei media queries para telas menores */
+        @media (max-height: 700px) {
+            .super-carousel {
+                height: 100vh;
+                border-radius: 0;
+                transform: scale(1);
+            }
+            
+            .frame-content {
+                padding: 30px 30px 90px;
+            }
+            
+            .main-content {
+                padding-bottom: 10px;
+            }
+            
+            h1 {
+                font-size: 30px;
+                margin-bottom: 15px;
+            }
+            
+            p {
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+            
+            .icon-wrapper {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 20px;
+            }
+            
+            .icon-wrapper img {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .frame-footer {
+                bottom: 30px;
+                padding: 0 30px;
+            }
+            
+            .btn {
+                padding: 15px 25px;
+                min-height: 55px;
+            }
         }
     </style>
 </head>
@@ -698,20 +623,24 @@ html
                 }
             }
             
-            // Autoplay
+            // Autoplay modificado para não voltar ao início
             function startAutoPlay() {
                 autoPlayInterval = setInterval(() => {
                     if (currentIndex < totalFrames - 1) {
                         updateCarousel(currentIndex + 1);
                     } else {
-                        updateCarousel(0);
+                        // Não faz nada quando chega no último slide
+                        clearInterval(autoPlayInterval);
                     }
                 }, 6000);
             }
             
             function resetAutoPlay() {
                 clearInterval(autoPlayInterval);
-                startAutoPlay();
+                // Só reinicia o autoplay se não estiver no último slide
+                if (currentIndex < totalFrames - 1) {
+                    startAutoPlay();
+                }
             }
             
             // Pausar autoplay ao interagir
@@ -720,69 +649,11 @@ html
             });
             
             filmStrip.addEventListener('mouseleave', () => {
-                startAutoPlay();
+                // Só reinicia se não estiver no último slide
+                if (currentIndex < totalFrames - 1) {
+                    startAutoPlay();
+                }
             });
-        });
-
-         // JavaScript otimizado
-         document.addEventListener('DOMContentLoaded', function() {
-            const filmStrip = document.querySelector('.film-strip');
-            const frames = document.querySelectorAll('.frame');
-            const indicators = document.querySelectorAll('.indicator');
-            const nextButtons = document.querySelectorAll('.btn:not(.skip)');
-            const skipButtons = document.querySelectorAll('.btn.skip');
-            
-            let currentIndex = 0;
-            const totalFrames = frames.length;
-            let autoPlayInterval;
-            let isAnimating = false;
-            let startX, moveX;
-            
-            // Função para verificar viewport
-            function checkViewport() {
-                if (window.innerWidth < 500) {
-                    document.documentElement.style.fontSize = '14px';
-                }
-            }
-            
-            // Iniciar autoplay
-            function startAutoPlay() {
-                autoPlayInterval = setInterval(() => {
-                    if (currentIndex < totalFrames - 1) {
-                        updateCarousel(currentIndex + 1);
-                    } else {
-                        updateCarousel(0);
-                    }
-                }, 6000);
-            }
-            
-            // Melhor controle de touch
-            filmStrip.addEventListener('touchstart', (e) => {
-                startX = e.touches[0].clientX;
-            }, { passive: true });
-            
-            filmStrip.addEventListener('touchmove', (e) => {
-                if (!isAnimating) {
-                    moveX = e.touches[0].clientX;
-                    const diff = startX - moveX;
-                    
-                    // Limitar movimento para melhor performance
-                    if (Math.abs(diff) > 50) {
-                        if (diff > 0 && currentIndex < totalFrames - 1) {
-                            updateCarousel(currentIndex + 1);
-                        } else if (diff < 0 && currentIndex > 0) {
-                            updateCarousel(currentIndex - 1);
-                        }
-                    }
-                }
-            }, { passive: false });
-            
-            // Verificar viewport ao carregar e redimensionar
-            window.addEventListener('resize', checkViewport);
-            checkViewport();
-            startAutoPlay();
-            
-            // Restante do JavaScript anterior...
         });
     </script>
 </body>
