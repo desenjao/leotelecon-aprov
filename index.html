@@ -2,7 +2,10 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Leo Telecon - Fibra óptica com tecnologia de ponta para streaming, jogos e trabalho sem limites">
+    <meta name="keywords" content="internet, fibra óptica, telecomunicações, banda larga, internet rápida">
+    <meta name="theme-color" content="#0066ff">
     <title>Leo Telecon - A Revolução Digital</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
@@ -12,6 +15,7 @@
             --leo-dark: #070d1a;
             --leo-darker: #040813;
             --leo-gradient: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);
+            --leo-orange: #FF7A00;
         }
         
         * {
@@ -28,6 +32,7 @@
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
         
         .super-carousel {
@@ -59,6 +64,7 @@
             width: 500%;
             height: 100%;
             transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+            will-change: transform;
         }
         
         .frame {
@@ -85,7 +91,7 @@
             position: relative;
             width: 100%;
             height: 100%;
-            padding: 40px 40px 100px; /* Aumentei o padding inferior para os botões */
+            padding: 40px 40px 120px; /* Aumentado o padding inferior */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -110,6 +116,8 @@
             filter: brightness(0.4) contrast(1.2);
             transform: scale(1.1);
             transition: transform 8s linear, filter 1s ease;
+            will-change: transform;
+            loading: "lazy";
         }
         
         .frame.active .frame-bg {
@@ -143,7 +151,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding-bottom: 20px; /* Adicionei espaço extra */
+            padding-bottom: 20px;
         }
         
         .icon-wrapper {
@@ -154,7 +162,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 30px; /* Reduzi um pouco o margin */
+            margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0, 102, 255, 0.5);
             transform: scale(0);
             transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s;
@@ -181,18 +189,19 @@
         
         p {
             font-size: 18px;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.9); /* Aumentado o contraste */
             line-height: 1.6;
-            margin-bottom: 30px; /* Reduzi o margin */
+            margin-bottom: 30px;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
         }
         
         .frame-footer {
             width: 100%;
             position: absolute;
-            bottom: 40px; /* Posicionamento fixo na parte inferior */
+            bottom: 50px; /* Aumentado para garantir visibilidade em dispositivos móveis */
             left: 0;
             padding: 0 40px;
+            z-index: 5; /* Garantir que fique acima de outros elementos */
         }
         
         .indicators {
@@ -202,10 +211,10 @@
         }
         
         .indicator {
-            width: 10px;
-            height: 10px;
+            width: 12px; /* Aumentado para melhor visibilidade */
+            height: 12px; /* Aumentado para melhor visibilidade */
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.3); /* Aumentado o contraste */
             margin: 0 6px;
             cursor: pointer;
             transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
@@ -231,6 +240,7 @@
         .indicator.active {
             background: transparent;
             transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(0, 102, 255, 0.7);
         }
         
         .btn {
@@ -247,7 +257,8 @@
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
-            min-height: 60px; /* Altura mínima para melhor toque */
+            min-height: 64px; /* Aumentado para melhor área de toque */
+            -webkit-tap-highlight-color: transparent;
         }
         
         .btn::after {
@@ -280,6 +291,7 @@
             border: 2px solid rgba(255, 255, 255, 0.3);
             margin-top: 15px;
             box-shadow: none;
+            min-height: 60px; /* Aumentado para melhor área de toque */
         }
         
         .btn.skip:hover {
@@ -298,6 +310,7 @@
             z-index: 0;
             animation: float 8s infinite ease-in-out;
             opacity: 0.7;
+            will-change: transform;
         }
         
         @keyframes float {
@@ -307,7 +320,166 @@
             75% { transform: translate(10px, -20px); }
         }
 
-        /* Adicionei media queries para telas menores */
+        /* Área clicável lateral */
+        .right-tap-area {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 30%;
+            height: 100%;
+            z-index: 10;
+            cursor: pointer;
+        }
+        
+        /* Feedback visual para área de toque */
+        .tap-feedback {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(0);
+            opacity: 0;
+            z-index: 20;
+            pointer-events: none;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-container {
+            background: var(--leo-dark);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 102, 255, 0.3);
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.active .modal-container {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--leo-orange);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            font-weight: 800;
+            font-size: 20px;
+            color: white;
+        }
+        
+        .modal-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .modal-content {
+            color: rgba(255, 255, 255, 0.9); /* Aumentado o contraste */
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+            width: 40px; /* Área de toque maior */
+            height: 40px; /* Área de toque maior */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+        }
+        
+        .modal-close:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .modal-btn {
+            background: var(--leo-gradient);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            min-height: 60px; /* Aumentado para melhor área de toque */
+        }
+        
+        .modal-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.5);
+        }
+
+        /* Indicador de carregamento */
+        .loading-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--leo-blue);
+            animation: spin 1s infinite linear;
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Ajustes para dispositivos móveis */
         @media (max-height: 700px) {
             .super-carousel {
                 height: 100vh;
@@ -316,7 +488,7 @@
             }
             
             .frame-content {
-                padding: 30px 30px 90px;
+                padding: 30px 30px 110px; /* Aumentado o padding inferior */
             }
             
             .main-content {
@@ -345,56 +517,116 @@
             }
             
             .frame-footer {
-                bottom: 30px;
+                bottom: 40px; /* Garantir que fique visível */
                 padding: 0 30px;
             }
             
             .btn {
                 padding: 15px 25px;
-                min-height: 55px;
+                min-height: 60px;
             }
+        }
+
+        /* Ajustes específicos para dispositivos muito pequenos */
+        @media (max-height: 600px) {
+            .frame-content {
+                padding: 20px 20px 100px;
+            }
+            
+            .frame-footer {
+                bottom: 30px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            p {
+                font-size: 14px;
+            }
+            
+            .icon-wrapper {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .icon-wrapper img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        /* Animação de entrada */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .super-carousel {
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Acessibilidade - foco visível */
+        button:focus, .indicator:focus {
+            outline: 2px solid var(--leo-blue);
+            outline-offset: 2px;
+        }
+
+        /* Classe para esconder visualmente elementos (acessibilidade) */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
         }
     </style>
 </head>
 <body>
-    <div class="super-carousel">
+    <div class="super-carousel" role="region" aria-label="Apresentação Leo Telecon">
         <div class="glow" style="top: -100px; left: -100px;"></div>
         <div class="glow" style="bottom: -100px; right: -100px; animation-delay: 2s;"></div>
+        <div class="loading-indicator" id="loadingIndicator"></div>
         
         <div class="film-wrapper">
-            <div class="film-strip">
+            <div class="film-strip" role="list">
                 <!-- Frame 1 -->
-                <div class="frame active">
-                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="frame-bg">
+                <div class="frame active" role="listitem" aria-label="Slide 1 de 5">
+                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="frame-bg" alt="Imagem de fundo representando tecnologia de internet" loading="lazy">
                     <div class="frame-content">
                         <div class="frame-header">
-                            <div class="logo">LEO <span>TELECON</span></div>
+                            <div class="logo" role="banner">LEO <span>TELECON</span></div>
                         </div>
                         
                         <div class="main-content">
                             <div class="icon-wrapper">
-                                <img src="https://cdn-icons-png.flaticon.com/512/3059/3059518.png" alt="Velocidade">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3059/3059518.png" alt="Ícone de velocidade">
                             </div>
                             <h1>Internet que desafia a velocidade da luz</h1>
                             <p>Fibra óptica com tecnologia de ponta para streaming, jogos e trabalho sem limites</p>
                         </div>
                         
                         <div class="frame-footer">
-                            <div class="indicators">
-                                <div class="indicator active"></div>
-                                <div class="indicator"></div>
-                                <div class="indicator"></div>
-                                <div class="indicator"></div>
-                                <div class="indicator"></div>
+                            <div class="indicators" role="tablist" aria-label="Navegação entre slides">
+                                <button class="indicator active" role="tab" aria-selected="true" aria-label="Slide 1" tabindex="0"></button>
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 2" tabindex="0"></button>
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 3" tabindex="0"></button>
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 4" tabindex="0"></button>
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 5" tabindex="0"></button>
                             </div>
-                            <button class="btn">Explore nossa rede</button>
+                            <button class="btn" data-modal="internet" aria-haspopup="dialog">Explore nossa rede</button>
                         </div>
                     </div>
+                    <div class="right-tap-area" aria-label="Próximo slide" role="button" tabindex="0"></div>
                 </div>
                 
                 <!-- Frame 2 -->
-                <div class="frame">
-                    <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="frame-bg">
+                <div class="frame" role="listitem" aria-label="Slide 2 de 5">
+                    <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="frame-bg" alt="Imagem de fundo representando suporte técnico" loading="lazy">
                     <div class="frame-content">
                         <div class="frame-header">
                             <div class="logo">LEO <span>TELECON</span></div>
@@ -402,29 +634,30 @@
                         
                         <div class="main-content">
                             <div class="icon-wrapper">
-                                <img src="https://cdn-icons-png.flaticon.com/512/3059/3059539.png" alt="Suporte">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3059/3059539.png" alt="Ícone de suporte">
                             </div>
                             <h1>Suporte que entende você</h1>
                             <p>Nossa equipe especializada resolve qualquer problema em tempo recorde, 24 horas por dia</p>
                         </div>
                         
                         <div class="frame-footer">
-                            <div class="indicators">
-                                <div class="indicator"></div>
-                                <div class="indicator active"></div>
-                                <div class="indicator"></div>
-                                <div class="indicator"></div>
-                                <div class="indicator"></div>
+                            <div class="indicators" role="tablist" aria-label="Navegação entre slides">
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 1" tabindex="0"></button>
+                                <button class="indicator active" role="tab" aria-selected="true" aria-label="Slide 2" tabindex="0"></button>
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 3" tabindex="0"></button>
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 4" tabindex="0"></button>
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 5" tabindex="0"></button>
                             </div>
-                            <button class="btn">Fale com um especialista</button>
+                            <button class="btn" data-modal="suporte" aria-haspopup="dialog">Fale com um especialista</button>
                             <button class="btn skip">Pular</button>
                         </div>
                     </div>
+                    <div class="right-tap-area" aria-label="Próximo slide" role="button" tabindex="0"></div>
                 </div>
                 
                 <!-- Frame 3 -->
-                <div class="frame">
-                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="frame-bg">
+                <div class="frame" role="listitem" aria-label="Slide 3 de 5">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="frame-bg" alt="Imagem de fundo representando planos de internet" loading="lazy">
                     <div class="frame-content">
                         <div class="frame-header">
                             <div class="logo">LEO <span>TELECON</span></div>
@@ -432,29 +665,30 @@
                         
                         <div class="main-content">
                             <div class="icon-wrapper">
-                                <img src="https://cdn-icons-png.flaticon.com/512/3059/3059528.png" alt="Planos">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3059/3059528.png" alt="Ícone de planos">
                             </div>
                             <h1>Planos sob medida para cada necessidade</h1>
                             <p>Da conexão básica ao pacote empresarial premium, temos a solução ideal para você</p>
                         </div>
                         
                         <div class="frame-footer">
-                            <div class="indicators">
-                                <div class="indicator"></div>
-                                <div class="indicator"></div>
-                                <div class="indicator active"></div>
-                                <div class="indicator"></div>
-                                <div class="indicator"></div>
+                            <div class="indicators" role="tablist" aria-label="Navegação entre slides">
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 1" tabindex="0"></button>
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 2" tabindex="0"></button>
+                                <button class="indicator active" role="tab" aria-selected="true" aria-label="Slide 3" tabindex="0"></button>
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 4" tabindex="0"></button>
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 5" tabindex="0"></button>
                             </div>
-                            <button class="btn">Ver planos</button>
+                            <button class="btn" data-modal="planos" aria-haspopup="dialog">Ver planos</button>
                             <button class="btn skip">Pular</button>
                         </div>
                     </div>
+                    <div class="right-tap-area" aria-label="Próximo slide" role="button" tabindex="0"></div>
                 </div>
                 
                 <!-- Frame 4 -->
-                <div class="frame">
-                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="frame-bg">
+                <div class="frame" role="listitem" aria-label="Slide 4 de 5">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="frame-bg" alt="Imagem de fundo representando cobertura de rede" loading="lazy">
                     <div class="frame-content">
                         <div class="frame-header">
                             <div class="logo">LEO <span>TELECON</span></div>
@@ -462,29 +696,30 @@
                         
                         <div class="main-content">
                             <div class="icon-wrapper">
-                                <img src="https://cdn-icons-png.flaticon.com/512/3059/3059544.png" alt="Cobertura">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3059/3059544.png" alt="Ícone de cobertura">
                             </div>
                             <h1>Levando conexão onde ninguém levou</h1>
                             <p>Expansão contínua para alcançar cada vez mais lares e empresas com nossa rede de qualidade</p>
                         </div>
                         
                         <div class="frame-footer">
-                            <div class="indicators">
-                                <div class="indicator"></div>
-                                <div class="indicator"></div>
-                                <div class="indicator"></div>
-                                <div class="indicator active"></div>
-                                <div class="indicator"></div>
+                            <div class="indicators" role="tablist" aria-label="Navegação entre slides">
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 1" tabindex="0"></button>
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 2" tabindex="0"></button>
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 3" tabindex="0"></button>
+                                <button class="indicator active" role="tab" aria-selected="true" aria-label="Slide 4" tabindex="0"></button>
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 5" tabindex="0"></button>
                             </div>
-                            <button class="btn">Ver áreas de cobertura</button>
+                            <button class="btn" data-modal="cobertura" aria-haspopup="dialog">Ver áreas de cobertura</button>
                             <button class="btn skip">Pular</button>
                         </div>
                     </div>
+                    <div class="right-tap-area" aria-label="Próximo slide" role="button" tabindex="0"></div>
                 </div>
                 
                 <!-- Frame 5 -->
-                <div class="frame">
-                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="frame-bg">
+                <div class="frame" role="listitem" aria-label="Slide 5 de 5">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="frame-bg" alt="Imagem de fundo representando revolução digital" loading="lazy">
                     <div class="frame-content">
                         <div class="frame-header">
                             <div class="logo">LEO <span>TELECON</span></div>
@@ -492,25 +727,41 @@
                         
                         <div class="main-content">
                             <div class="icon-wrapper">
-                                <img src="https://cdn-icons-png.flaticon.com/512/3059/3059554.png" alt="Conectar">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3059/3059554.png" alt="Ícone de conexão">
                             </div>
                             <h1>Sua revolução digital começa aqui</h1>
                             <p>Junte-se a milhares de clientes satisfeitos e experimente o futuro das telecomunicações</p>
                         </div>
                         
                         <div class="frame-footer">
-                            <div class="indicators">
-                                <div class="indicator"></div>
-                                <div class="indicator"></div>
-                                <div class="indicator"></div>
-                                <div class="indicator"></div>
-                                <div class="indicator active"></div>
+                            <div class="indicators" role="tablist" aria-label="Navegação entre slides">
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 1" tabindex="0"></button>
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 2" tabindex="0"></button>
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 3" tabindex="0"></button>
+                                <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 4" tabindex="0"></button>
+                                <button class="indicator active" role="tab" aria-selected="true" aria-label="Slide 5" tabindex="0"></button>
                             </div>
-                            <button class="btn">Quero ser Leo Telecon</button>
+                            <button class="btn" data-modal="assinar" aria-haspopup="dialog">Quero ser Leo Telecon</button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="tap-feedback" id="tapFeedback"></div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-container">
+            <button class="modal-close" aria-label="Fechar">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon" aria-hidden="true">i</div>
+                <h3 class="modal-title" id="modalTitle">Detalhes da Oferta</h3>
+            </div>
+            <div class="modal-content">
+                <!-- O conteúdo será inserido dinamicamente via JavaScript -->
+            </div>
+            <button class="modal-btn">Entendido</button>
         </div>
     </div>
 
@@ -521,14 +772,76 @@
             const indicators = document.querySelectorAll('.indicator');
             const nextButtons = document.querySelectorAll('.btn:not(.skip)');
             const skipButtons = document.querySelectorAll('.btn.skip');
+            const rightTapAreas = document.querySelectorAll('.right-tap-area');
+            const modalOverlay = document.querySelector('.modal-overlay');
+            const modalClose = document.querySelector('.modal-close');
+            const modalContent = document.querySelector('.modal-content');
+            const modalTitle = document.querySelector('.modal-title');
+            const modalBtn = document.querySelector('.modal-btn');
+            const tapFeedback = document.getElementById('tapFeedback');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            
+            // Conteúdo dos modais
+            const modalData = {
+                internet: {
+                    title: "Nossa Rede de Internet",
+                    content: "<p><strong>Velocidades de 100Mbps a 1Gbps</strong> com tecnologia de fibra óptica pura (FTTH).</p><p>• Ping ultrabaixo para jogos online</p><p>• Upload simétrico (mesma velocidade de download)</p><p>• Estabilidade 99,9% do tempo</p><p>• Wi-Fi 6 incluso nos planos acima de 300Mbps</p>"
+                },
+                suporte: {
+                    title: "Suporte Técnico",
+                    content: "<p><strong>Atendimento humano 24/7</strong> por telefone, chat e WhatsApp.</p><p>• Tempo médio de resposta: 2 minutos</p><p>• Agendamento de visita técnica em até 24h</p><p>• Equipe certificada e treinada</p><p>• Monitoramento proativo da sua conexão</p>"
+                },
+                planos: {
+                    title: "Nossos Planos",
+                    content: "<p><strong>Planos residenciais e empresariais</strong> com preços competitivos.</p><p>• Residencial Básico: 100Mbps - R$ 89,90/mês</p><p>• Residencial Premium: 300Mbps - R$ 129,90/mês</p><p>• Gamer: 500Mbps + prioridade - R$ 179,90/mês</p><p>• Empresarial: 1Gbps + IP fixo - R$ 399,90/mês</p>"
+                },
+                cobertura: {
+                    title: "Área de Cobertura",
+                    content: "<p><strong>Atendemos em toda a região metropolitana</strong> com expansão contínua.</p><p>• Cobertura 100% na capital</p><p>• 85% nos bairros periféricos</p><p>• Expansão para 5 cidades vizinhas em 2024</p><p>• Consulta de disponibilidade online</p>"
+                },
+                assinar: {
+                    title: "Assine Agora",
+                    content: "<p><strong>Processo simples e rápido</strong> para você começar a usar.</p><p>• Instalação gratuita</p><p>• Sem fidelidade</p><p>• Equipamentos inclusos</p><p>• Primeiro mês com 50% de desconto</p><p>• Suporte prioritário nos primeiros 30 dias</p>"
+                }
+            };
             
             let currentIndex = 0;
             const totalFrames = frames.length;
             let autoPlayInterval;
             let isAnimating = false;
             
+            // Pré-carregar imagens
+            preloadImages();
+            
             // Iniciar autoplay
             startAutoPlay();
+            
+            // Função para pré-carregar imagens
+            function preloadImages() {
+                loadingIndicator.style.opacity = '1';
+                
+                const imageUrls = Array.from(document.querySelectorAll('.frame-bg')).map(img => img.src);
+                const iconUrls = Array.from(document.querySelectorAll('.icon-wrapper img')).map(img => img.src);
+                const allUrls = [...imageUrls, ...iconUrls];
+                
+                let loadedCount = 0;
+                
+                allUrls.forEach(url => {
+                    const img = new Image();
+                    img.onload = img.onerror = () => {
+                        loadedCount++;
+                        if (loadedCount === allUrls.length) {
+                            loadingIndicator.style.opacity = '0';
+                        }
+                    };
+                    img.src = url;
+                });
+                
+                // Fallback para esconder o indicador de carregamento após 5 segundos
+                setTimeout(() => {
+                    loadingIndicator.style.opacity = '0';
+                }, 5000);
+            }
             
             // Função para atualizar o carrossel
             function updateCarousel(index, direction = 'next') {
@@ -548,6 +861,9 @@
                 setTimeout(() => {
                     frames[currentIndex].classList.add('active');
                     isAnimating = false;
+                    
+                    // Atualizar atributos ARIA
+                    updateAriaAttributes();
                 }, 300);
                 
                 // Atualizar indicadores
@@ -555,6 +871,13 @@
                 
                 // Reiniciar autoplay
                 resetAutoPlay();
+            }
+            
+            // Atualizar atributos ARIA
+            function updateAriaAttributes() {
+                indicators.forEach((indicator, index) => {
+                    indicator.setAttribute('aria-selected', index === currentIndex ? 'true' : 'false');
+                });
             }
             
             // Atualizar indicadores
@@ -575,23 +898,45 @@
                         updateCarousel(index);
                     }
                 });
+                
+                // Navegação por teclado
+                indicator.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        if (index !== currentIndex) {
+                            updateCarousel(index);
+                        }
+                    }
+                });
             });
             
             // Event listeners para botões "Próximo"
             nextButtons.forEach(button => {
-                button.addEventListener('click', () => {
+                button.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('skip')) return;
+                    
+                    // Mostrar feedback visual
+                    showTapFeedback(e);
+                    
+                    // Verificar se tem modal associado
+                    const modalType = e.target.getAttribute('data-modal');
+                    if (modalType) {
+                        openModal(modalType);
+                        return;
+                    }
+                    
                     if (currentIndex < totalFrames - 1) {
                         updateCarousel(currentIndex + 1);
-                    } else {
-                        // Ação para o último frame
-                        window.location.href = '#assine-agora'; // Substituir por link real
                     }
                 });
             });
             
             // Event listeners para botões "Pular"
             skipButtons.forEach(button => {
-                button.addEventListener('click', () => {
+                button.addEventListener('click', (e) => {
+                    // Mostrar feedback visual
+                    showTapFeedback(e);
+                    
                     updateCarousel(totalFrames - 1);
                 });
             });
@@ -621,6 +966,50 @@
                     // Swipe para a direita (anterior)
                     updateCarousel(currentIndex - 1, 'prev');
                 }
+            }
+            
+            // Navegação por toque na área direita
+            rightTapAreas.forEach(area => {
+                area.addEventListener('click', (e) => {
+                    // Mostrar feedback visual
+                    showTapFeedback(e);
+                    
+                    if (currentIndex < totalFrames - 1) {
+                        updateCarousel(currentIndex + 1);
+                    }
+                });
+                
+                // Navegação por teclado
+                area.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        if (currentIndex < totalFrames - 1) {
+                            updateCarousel(currentIndex + 1);
+                        }
+                    }
+                });
+            });
+            
+            // Função para mostrar feedback visual ao tocar
+            function showTapFeedback(e) {
+                const x = e.clientX || (e.touches && e.touches[0].clientX) || (e.changedTouches && e.changedTouches[0].clientX);
+                const y = e.clientY || (e.touches && e.touches[0].clientY) || (e.changedTouches && e.changedTouches[0].clientY);
+                
+                if (!x || !y) return;
+                
+                tapFeedback.style.left = `${x - 25}px`;
+                tapFeedback.style.top = `${y - 25}px`;
+                tapFeedback.style.transform = 'scale(1)';
+                tapFeedback.style.opacity = '1';
+                
+                setTimeout(() => {
+                    tapFeedback.style.transform = 'scale(2)';
+                    tapFeedback.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        tapFeedback.style.transform = 'scale(0)';
+                    }, 300);
+                }, 300);
             }
             
             // Autoplay modificado para não voltar ao início
@@ -653,6 +1042,91 @@
                 if (currentIndex < totalFrames - 1) {
                     startAutoPlay();
                 }
+            });
+            
+            // Modal functionality
+            nextButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    if (this.classList.contains('skip')) return;
+                    e.preventDefault();
+                    
+                    const modalType = this.getAttribute('data-modal');
+                    if (modalType) {
+                        openModal(modalType);
+                    }
+                });
+            });
+            
+            function openModal(type) {
+                const data = modalData[type];
+                modalTitle.textContent = data.title;
+                modalContent.innerHTML = data.content;
+                modalOverlay.classList.add('active');
+                
+                // Atualizar atributos ARIA
+                modalOverlay.setAttribute('aria-hidden', 'false');
+                
+                // Pausar carrossel quando modal aberto
+                clearInterval(autoPlayInterval);
+                
+                // Focar no primeiro elemento interativo do modal
+                setTimeout(() => {
+                    modalClose.focus();
+                }, 100);
+            }
+            
+            function closeModal() {
+                modalOverlay.classList.remove('active');
+                
+                // Atualizar atributos ARIA
+                modalOverlay.setAttribute('aria-hidden', 'true');
+                
+                // Reiniciar autoplay se não estiver no último slide
+                if (currentIndex < totalFrames - 1) {
+                    startAutoPlay();
+                }
+                
+                // Devolver o foco ao elemento que abriu o modal
+                const activeButton = document.querySelector('.frame.active .btn');
+                if (activeButton) {
+                    activeButton.focus();
+                }
+            }
+            
+            modalClose.addEventListener('click', closeModal);
+            modalBtn.addEventListener('click', closeModal);
+            
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    closeModal();
+                }
+            });
+            
+            // Fechar modal com tecla ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+            
+            // Navegação por teclado dentro do modal
+            modalBtn.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab' && !e.shiftKey) {
+                    e.preventDefault();
+                    modalClose.focus();
+                }
+            });
+            
+            modalClose.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab' && e.shiftKey) {
+                    e.preventDefault();
+                    modalBtn.focus();
+                }
+            });
+            
+            // Detectar quando as imagens estão carregadas
+            window.addEventListener('load', function() {
+                loadingIndicator.style.opacity = '0';
             });
         });
     </script>
