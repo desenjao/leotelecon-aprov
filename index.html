@@ -1,167 +1,599 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <title>Página Inicial - Léo Telecom</title>
+    <title>Leo Telecon - A Revolução Digital</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
+        
+        :root {
+            --leo-blue: #0066ff;
+            --leo-dark: #070d1a;
+            --leo-darker: #040813;
+            --leo-gradient: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--leo-darker);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        .super-carousel {
+            position: relative;
+            width: 100%;
+            max-width: 414px;
+            height: 896px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s;
+            border: 1px solid rgba(0, 102, 255, 0.2);
+        }
+        
+        .super-carousel:hover {
+            transform: scale(0.91);
+        }
+        
+        .film-wrapper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            perspective: 1200px;
+        }
+        
+        .film-strip {
+            display: flex;
+            width: 500%;
+            height: 100%;
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        
+        .frame {
+            position: relative;
+            width: 20%;
+            height: 100%;
+            padding: 0;
+            overflow: hidden;
+            background: var(--leo-dark);
+        }
+        
+        .frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+        
+        .frame-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s cubic-bezier(0.77, 0, 0.175, 1) 0.3s;
+        }
+        
+        .frame.active .frame-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .frame-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4) contrast(1.2);
+            transform: scale(1.1);
+            transition: transform 8s linear, filter 1s ease;
+        }
+        
+        .frame.active .frame-bg {
+            transform: scale(1);
+            filter: brightness(0.5) contrast(1.2);
+        }
+        
+        .frame-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+        
+        .logo span {
+            color: var(--leo-blue);
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .icon-wrapper {
+            width: 120px;
+            height: 120px;
+            background: var(--leo-gradient);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.5);
+            transform: scale(0);
+            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s;
+        }
+        
+        .frame.active .icon-wrapper {
+            transform: scale(1);
+        }
+        
+        .icon-wrapper img {
+            width: 60px;
+            height: 60px;
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+        }
+        
+        h1 {
+            font-size: 36px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            line-height: 1.3;
+        }
+        
+        p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 40px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .frame-footer {
+            width: 100%;
+        }
+        
+        .indicators {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 6px;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .indicator::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: white;
+            transition: left 4s linear;
+        }
+        
+        .indicator.active::after {
+            left: 100%;
+        }
+        
+        .indicator.active {
+            background: transparent;
+            transform: scale(1.2);
+        }
+        
+        .btn {
+            background: var(--leo-gradient);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
+        }
+        
+        .btn:hover::after {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 102, 255, 0.5);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn.skip {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            margin-top: 15px;
+            box-shadow: none;
+        }
+        
+        .btn.skip:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        /* Efeitos especiais */
+        .glow {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0, 102, 255, 0.6) 0%, rgba(0, 102, 255, 0) 70%);
+            border-radius: 50%;
+            filter: blur(30px);
+            z-index: 0;
+            animation: float 8s infinite ease-in-out;
+            opacity: 0.7;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(20px, 20px); }
+            50% { transform: translate(-20px, 10px); }
+            75% { transform: translate(10px, -20px); }
+        }
+    </style>
 </head>
 <body>
-    <nav class="nav-bar">
-        <div class="nav-content">
-            <div class="location-current">
-              
-                <br>
-                <span id="localidade"></span>
+    <div class="super-carousel">
+        <div class="glow" style="top: -100px; left: -100px;"></div>
+        <div class="glow" style="bottom: -100px; right: -100px; animation-delay: 2s;"></div>
+        
+        <div class="film-wrapper">
+            <div class="film-strip">
+                <!-- Frame 1 -->
+                <div class="frame active">
+                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="frame-bg">
+                    <div class="frame-content">
+                        <div class="frame-header">
+                            <div class="logo">LEO <span>TELECON</span></div>
+                        </div>
+                        
+                        <div class="main-content">
+                            <div class="icon-wrapper">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3059/3059518.png" alt="Velocidade">
+                            </div>
+                            <h1>Internet que desafia a velocidade da luz</h1>
+                            <p>Fibra óptica com tecnologia de ponta para streaming, jogos e trabalho sem limites</p>
+                        </div>
+                        
+                        <div class="frame-footer">
+                            <div class="indicators">
+                                <div class="indicator active"></div>
+                                <div class="indicator"></div>
+                                <div class="indicator"></div>
+                                <div class="indicator"></div>
+                                <div class="indicator"></div>
+                            </div>
+                            <button class="btn">Explore nossa rede</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Frame 2 -->
+                <div class="frame">
+                    <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="frame-bg">
+                    <div class="frame-content">
+                        <div class="frame-header">
+                            <div class="logo">LEO <span>TELECON</span></div>
+                        </div>
+                        
+                        <div class="main-content">
+                            <div class="icon-wrapper">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3059/3059539.png" alt="Suporte">
+                            </div>
+                            <h1>Suporte que entende você</h1>
+                            <p>Nossa equipe especializada resolve qualquer problema em tempo recorde, 24 horas por dia</p>
+                        </div>
+                        
+                        <div class="frame-footer">
+                            <div class="indicators">
+                                <div class="indicator"></div>
+                                <div class="indicator active"></div>
+                                <div class="indicator"></div>
+                                <div class="indicator"></div>
+                                <div class="indicator"></div>
+                            </div>
+                            <button class="btn">Fale com um especialista</button>
+                            <button class="btn skip">Pular</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Frame 3 -->
+                <div class="frame">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="frame-bg">
+                    <div class="frame-content">
+                        <div class="frame-header">
+                            <div class="logo">LEO <span>TELECON</span></div>
+                        </div>
+                        
+                        <div class="main-content">
+                            <div class="icon-wrapper">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3059/3059528.png" alt="Planos">
+                            </div>
+                            <h1>Planos sob medida para cada necessidade</h1>
+                            <p>Da conexão básica ao pacote empresarial premium, temos a solução ideal para você</p>
+                        </div>
+                        
+                        <div class="frame-footer">
+                            <div class="indicators">
+                                <div class="indicator"></div>
+                                <div class="indicator"></div>
+                                <div class="indicator active"></div>
+                                <div class="indicator"></div>
+                                <div class="indicator"></div>
+                            </div>
+                            <button class="btn">Ver planos</button>
+                            <button class="btn skip">Pular</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Frame 4 -->
+                <div class="frame">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="frame-bg">
+                    <div class="frame-content">
+                        <div class="frame-header">
+                            <div class="logo">LEO <span>TELECON</span></div>
+                        </div>
+                        
+                        <div class="main-content">
+                            <div class="icon-wrapper">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3059/3059544.png" alt="Cobertura">
+                            </div>
+                            <h1>Levando conexão onde ninguém levou</h1>
+                            <p>Expansão contínua para alcançar cada vez mais lares e empresas com nossa rede de qualidade</p>
+                        </div>
+                        
+                        <div class="frame-footer">
+                            <div class="indicators">
+                                <div class="indicator"></div>
+                                <div class="indicator"></div>
+                                <div class="indicator"></div>
+                                <div class="indicator active"></div>
+                                <div class="indicator"></div>
+                            </div>
+                            <button class="btn">Ver áreas de cobertura</button>
+                            <button class="btn skip">Pular</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Frame 5 -->
+                <div class="frame">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="frame-bg">
+                    <div class="frame-content">
+                        <div class="frame-header">
+                            <div class="logo">LEO <span>TELECON</span></div>
+                        </div>
+                        
+                        <div class="main-content">
+                            <div class="icon-wrapper">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3059/3059554.png" alt="Conectar">
+                            </div>
+                            <h1>Sua revolução digital começa aqui</h1>
+                            <p>Junte-se a milhares de clientes satisfeitos e experimente o futuro das telecomunicações</p>
+                        </div>
+                        
+                        <div class="frame-footer">
+                            <div class="indicators">
+                                <div class="indicator"></div>
+                                <div class="indicator"></div>
+                                <div class="indicator"></div>
+                                <div class="indicator"></div>
+                                <div class="indicator active"></div>
+                            </div>
+                            <button class="btn">Quero ser Leo Telecon</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <a href="locais.html" class="location-change">
-               
-                
-                <span>Escolha outra região</span>
-                
-            </a>
         </div>
-    </nav>
-
-    <header class="hero">
-        <div class="overlay"></div>
-        <div class="hero-content">
-            <img src="logo.png" alt="" style="width: 30vw; border-radius: 50%;">
-          <h1>Internet rápida e confiável, onde você estiver!</h1>
-          <p>Conectamos sua casa no interior com internet de alta qualidade via fibra ou antena. Com energia elétrica ou solar, a Leo Telecom leva conexão até você!</p>
-          <a href="#contato" class="btn">Quero minha internet agora!</a>
-          <p></p>
-        </div>
-      </header>
-    
-      <!-- Seção de Benefícios -->
-      <section id="beneficios" class="section">
-        <h2>Por que escolher a Leo Telecom?</h2>
-        <div class="benefits">
-          <div class="benefit">
-            <span class="icon">✅</span>
-            <p>Internet onde ninguém chega</p>
-          </div>
-          <div class="benefit">
-            <span class="icon">✅</span>
-            <p>Planos via antena e fibra</p>
-          </div>
-          <div class="benefit">
-            <span class="icon">✅</span>
-            <p>Internet para Energia elétrica e solar</p>
-          </div>
-          <div class="benefit">
-            <span class="icon">✅</span>
-            <p>Instalação rápida</p>
-          </div>
-          <div class="benefit">
-            <span class="icon">✅</span>
-            <p>Atendimento humanizado</p>
-          </div>
-        </div>
-      </section>
-    
-      <!-- Seção de Depoimentos -->
-      <section id="depoimentos" class="section">
-        <h2>Clientes Felizes</h2>
-        <div class="testimonials">
-          <div class="testimonial">
-            <p>"Moro no interior e achava impossível ter internet boa. A Leo Telecom resolveu meu problema!"</p>
-            <h4>João S.</h4>
-          </div>
-          <div class="testimonial">
-            <p>"Agora faço videochamadas sem travar, mesmo morando longe da cidade!"</p>
-            <h4>Maria R.</h4>
-          </div>
-        </div>
-      </section>
-    
-      <!-- Seção de Planos -->
-      <section id="planos" class="section">
-        <h2>Nossos Planos</h2>
-        <div class="plans">
-          <div class="plan">
-            <h3>Plano Antena</h3>
-            <p>Internet via rádio para áreas sem fibra.</p>
-            <a href="#contato" class="btn">Saiba Mais</a>
-          </div>
-          <div class="plan">
-            <h3>Plano Fibra</h3>
-            <p>Conexão ultrarrápida onde há cobertura.</p>
-            <a href="#contato" class="btn">Saiba Mais</a>
-          </div>
-          <div class="plan">
-            <h3>Plano Solar</h3>
-            <p>Opção para quem não tem energia elétrica constante.</p>
-            <a href="#contato" class="btn">Saiba Mais</a>
-          </div>
-        </div>
-      </section>
-    
-      <!-- Seção Como Funciona -->
-      <section id="como-funciona" class="section">
-        <h2>Como Funciona?</h2>
-        <div class="steps">
-          <div class="step">
-            <h3>1. Escolha seu plano</h3>
-            <p>Selecione a melhor opção para sua necessidade.</p>
-          </div>
-          <div class="step">
-            <h3>2. Instalação Rápida</h3>
-            <p>Nossa equipe instala a conexão na sua casa.</p>
-          </div>
-          <div class="step">
-            <h3>3. Conexão Online</h3>
-            <p>Pronto! Você já está online com a Leo Telecom.</p>
-          </div>
-        </div>
-      </section>
-    
-      <!-- Seção FAQ -->
-      <section id="faq" class="section">
-        <h2>Perguntas Frequentes</h2>
-        <div class="faq-item">
-          <h3>Quanto tempo leva para instalar?</h3>
-          <p>Em média, X dias.</p>
-        </div>
-        <div class="faq-item">
-          <h3>A internet funciona em dias de chuva?</h3>
-          <p>Sim, garantimos estabilidade.</p>
-        </div>
-        <div class="faq-item">
-          <h3>Quais as formas de pagamento?</h3>
-          <p>Aceitamos boleto, Pix e cartão.</p>
-        </div>
-      </section>
-    
-      <!-- Seção de Contato/CTA Final -->
-      <section id="contato" class="contact section">
-        <h2>Não fique sem internet!</h2>
-        <p>Conectamos você ainda esta semana!</p>
-        <a href="https://wa.me/+5589981118645?text=Ol%C3%A1%20gostaria%20de%20saber%20como%20fa%C3%A7o%20para%20ter%20internet%20na%20minha%20resid%C3%AAncia%3F" class="btn">Fale com a gente agora!</a>
-      </section>
-    
-      <!-- Rodapé -->
-      <footer>
-        <p>© 2025 Leo Telecom - Todos os direitos reservados.</p>
-      </footer> 
+    </div>
 
     <script>
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            const localidade = getQueryParam("localidade");
-            if (localidade) {
-                document.getElementById("localidade").textContent = `Localidade selecionada: ${localidade}`;
-                document.getElementById("current-location").textContent = localidade;
-            } else {
-                document.getElementById("localidade").textContent = "Nenhuma localidade selecionada.";
+        document.addEventListener('DOMContentLoaded', function() {
+            const filmStrip = document.querySelector('.film-strip');
+            const frames = document.querySelectorAll('.frame');
+            const indicators = document.querySelectorAll('.indicator');
+            const nextButtons = document.querySelectorAll('.btn:not(.skip)');
+            const skipButtons = document.querySelectorAll('.btn.skip');
+            
+            let currentIndex = 0;
+            const totalFrames = frames.length;
+            let autoPlayInterval;
+            let isAnimating = false;
+            
+            // Iniciar autoplay
+            startAutoPlay();
+            
+            // Função para atualizar o carrossel
+            function updateCarousel(index, direction = 'next') {
+                if (isAnimating) return;
+                isAnimating = true;
+                
+                // Remover classe active do frame atual
+                frames[currentIndex].classList.remove('active');
+                
+                // Atualizar índice
+                currentIndex = index;
+                
+                // Aplicar transformação
+                filmStrip.style.transform = `translateX(-${currentIndex * 20}%)`;
+                
+                // Adicionar classe active ao novo frame
+                setTimeout(() => {
+                    frames[currentIndex].classList.add('active');
+                    isAnimating = false;
+                }, 300);
+                
+                // Atualizar indicadores
+                updateIndicators();
+                
+                // Reiniciar autoplay
+                resetAutoPlay();
             }
+            
+            // Atualizar indicadores
+            function updateIndicators() {
+                indicators.forEach((indicator, index) => {
+                    if (index === currentIndex) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Navegação por indicadores
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    if (index !== currentIndex) {
+                        updateCarousel(index);
+                    }
+                });
+            });
+            
+            // Event listeners para botões "Próximo"
+            nextButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    if (currentIndex < totalFrames - 1) {
+                        updateCarousel(currentIndex + 1);
+                    } else {
+                        // Ação para o último frame
+                        window.location.href = '#assine-agora'; // Substituir por link real
+                    }
+                });
+            });
+            
+            // Event listeners para botões "Pular"
+            skipButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    updateCarousel(totalFrames - 1);
+                });
+            });
+            
+            // Navegação por swipe (toque em dispositivos móveis)
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            filmStrip.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+            
+            filmStrip.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+            
+            function handleSwipe() {
+                if (isAnimating) return;
+                
+                if (touchEndX < touchStartX - 50 && currentIndex < totalFrames - 1) {
+                    // Swipe para a esquerda (próximo)
+                    updateCarousel(currentIndex + 1);
+                }
+                
+                if (touchEndX > touchStartX + 50 && currentIndex > 0) {
+                    // Swipe para a direita (anterior)
+                    updateCarousel(currentIndex - 1, 'prev');
+                }
+            }
+            
+            // Autoplay
+            function startAutoPlay() {
+                autoPlayInterval = setInterval(() => {
+                    if (currentIndex < totalFrames - 1) {
+                        updateCarousel(currentIndex + 1);
+                    } else {
+                        updateCarousel(0);
+                    }
+                }, 6000);
+            }
+            
+            function resetAutoPlay() {
+                clearInterval(autoPlayInterval);
+                startAutoPlay();
+            }
+            
+            // Pausar autoplay ao interagir
+            filmStrip.addEventListener('mouseenter', () => {
+                clearInterval(autoPlayInterval);
+            });
+            
+            filmStrip.addEventListener('mouseleave', () => {
+                startAutoPlay();
+            });
         });
     </script>
 </body>
 </html>
-
