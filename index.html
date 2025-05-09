@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Leo Telecon - Fibra óptica com tecnologia de ponta para streaming, jogos e trabalho sem limites">
-    <meta name="keywords" content="internet, fibra óptica, telecomunicações, banda larga, internet rápida">
+    <meta name="description" content="Leo Telecon - Internet que não deixa na mão, pra você trabalhar, estudar ou ver seu filme sem travar">
+    <meta name="keywords" content="internet, fibra óptica, telecomunicações, banda larga, internet rápida, nordeste">
     <meta name="theme-color" content="#0066ff">
-    <title>Leo Telecon - A Revolução Digital</title>
+    <title>Leo Telecon - Internet que não deixa na mão</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
         
@@ -222,23 +222,9 @@
             overflow: hidden;
         }
         
-        .indicator::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
+        /* Novo estilo para indicadores - preenchimento simples */
+        .indicator.filled {
             background: white;
-            transition: left 4s linear;
-        }
-        
-        .indicator.active::after {
-            left: 100%;
-        }
-        
-        .indicator.active {
-            background: transparent;
             transform: scale(1.2);
             box-shadow: 0 0 10px rgba(0, 102, 255, 0.7);
         }
@@ -320,10 +306,21 @@
             75% { transform: translate(10px, -20px); }
         }
 
-        /* Área clicável lateral */
+        /* Áreas clicáveis laterais */
         .right-tap-area {
             position: absolute;
             right: 0;
+            top: 0;
+            width: 30%;
+            height: 100%;
+            z-index: 10;
+            cursor: pointer;
+        }
+        
+        /* Nova área clicável para voltar */
+        .left-tap-area {
+            position: absolute;
+            left: 0;
             top: 0;
             width: 30%;
             height: 100%;
@@ -606,21 +603,22 @@
                             <div class="icon-wrapper">
                                 <img src="https://cdn-icons-png.flaticon.com/512/3059/3059518.png" alt="Ícone de velocidade">
                             </div>
-                            <h1>Internet que desafia a velocidade da luz</h1>
-                            <p>Fibra óptica com tecnologia de ponta para streaming, jogos e trabalho sem limites</p>
+                            <h1>Internet que não deixa na mão</h1>
+                            <p>Pra você trabalhar, estudar ou ver seu filme sem travar – na hora que precisar!</p>
                         </div>
                         
                         <div class="frame-footer">
                             <div class="indicators" role="tablist" aria-label="Navegação entre slides">
-                                <button class="indicator active" role="tab" aria-selected="true" aria-label="Slide 1" tabindex="0"></button>
+                                <button class="indicator filled" role="tab" aria-selected="true" aria-label="Slide 1" tabindex="0"></button>
                                 <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 2" tabindex="0"></button>
                                 <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 3" tabindex="0"></button>
                                 <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 4" tabindex="0"></button>
                                 <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 5" tabindex="0"></button>
                             </div>
-                            <button class="btn" data-modal="internet" aria-haspopup="dialog">Explore nossa rede</button>
+                            <button class="btn" data-modal="internet" aria-haspopup="dialog">Quero essa internet boa</button>
                         </div>
                     </div>
+                    <div class="left-tap-area" aria-label="Slide anterior" role="button" tabindex="0"></div>
                     <div class="right-tap-area" aria-label="Próximo slide" role="button" tabindex="0"></div>
                 </div>
                 
@@ -636,22 +634,23 @@
                             <div class="icon-wrapper">
                                 <img src="https://cdn-icons-png.flaticon.com/512/3059/3059539.png" alt="Ícone de suporte">
                             </div>
-                            <h1>Suporte que entende você</h1>
-                            <p>Nossa equipe especializada resolve qualquer problema em tempo recorde, 24 horas por dia</p>
+                            <h1>Suporte que não enrola</h1>
+                            <p>Problema? A gente resolve rápido, sem burocracia e sem deixar você esperando.</p>
                         </div>
                         
                         <div class="frame-footer">
                             <div class="indicators" role="tablist" aria-label="Navegação entre slides">
                                 <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 1" tabindex="0"></button>
-                                <button class="indicator active" role="tab" aria-selected="true" aria-label="Slide 2" tabindex="0"></button>
+                                <button class="indicator filled" role="tab" aria-selected="true" aria-label="Slide 2" tabindex="0"></button>
                                 <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 3" tabindex="0"></button>
                                 <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 4" tabindex="0"></button>
                                 <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 5" tabindex="0"></button>
                             </div>
-                            <button class="btn" data-modal="suporte" aria-haspopup="dialog">Fale com um especialista</button>
+                            <button class="btn" data-modal="suporte" aria-haspopup="dialog">Preciso de ajuda agora</button>
                             <button class="btn skip">Pular</button>
                         </div>
                     </div>
+                    <div class="left-tap-area" aria-label="Slide anterior" role="button" tabindex="0"></div>
                     <div class="right-tap-area" aria-label="Próximo slide" role="button" tabindex="0"></div>
                 </div>
                 
@@ -667,22 +666,23 @@
                             <div class="icon-wrapper">
                                 <img src="https://cdn-icons-png.flaticon.com/512/3059/3059528.png" alt="Ícone de planos">
                             </div>
-                            <h1>Planos sob medida para cada necessidade</h1>
-                            <p>Da conexão básica ao pacote empresarial premium, temos a solução ideal para você</p>
+                            <h1>Planos que cabem no seu bolso</h1>
+                            <p>Do básico ao turbo, tem um jeito certo pra você – sem gastar o que não tem.</p>
                         </div>
                         
                         <div class="frame-footer">
                             <div class="indicators" role="tablist" aria-label="Navegação entre slides">
                                 <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 1" tabindex="0"></button>
                                 <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 2" tabindex="0"></button>
-                                <button class="indicator active" role="tab" aria-selected="true" aria-label="Slide 3" tabindex="0"></button>
+                                <button class="indicator filled" role="tab" aria-selected="true" aria-label="Slide 3" tabindex="0"></button>
                                 <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 4" tabindex="0"></button>
                                 <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 5" tabindex="0"></button>
                             </div>
-                            <button class="btn" data-modal="planos" aria-haspopup="dialog">Ver planos</button>
+                            <button class="btn" data-modal="planos" aria-haspopup="dialog">Me mostra os planos</button>
                             <button class="btn skip">Pular</button>
                         </div>
                     </div>
+                    <div class="left-tap-area" aria-label="Slide anterior" role="button" tabindex="0"></div>
                     <div class="right-tap-area" aria-label="Próximo slide" role="button" tabindex="0"></div>
                 </div>
                 
@@ -698,8 +698,8 @@
                             <div class="icon-wrapper">
                                 <img src="https://cdn-icons-png.flaticon.com/512/3059/3059544.png" alt="Ícone de cobertura">
                             </div>
-                            <h1>Levando conexão onde ninguém levou</h1>
-                            <p>Expansão contínua para alcançar cada vez mais lares e empresas com nossa rede de qualidade</p>
+                            <h1>Chegamos onde os outros não chegam</h1>
+                            <p>No seu bairro, na sua rua, na sua casa – a gente não deixa ninguém desconectado.</p>
                         </div>
                         
                         <div class="frame-footer">
@@ -707,13 +707,14 @@
                                 <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 1" tabindex="0"></button>
                                 <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 2" tabindex="0"></button>
                                 <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 3" tabindex="0"></button>
-                                <button class="indicator active" role="tab" aria-selected="true" aria-label="Slide 4" tabindex="0"></button>
+                                <button class="indicator filled" role="tab" aria-selected="true" aria-label="Slide 4" tabindex="0"></button>
                                 <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 5" tabindex="0"></button>
                             </div>
-                            <button class="btn" data-modal="cobertura" aria-haspopup="dialog">Ver áreas de cobertura</button>
+                            <button class="btn" data-modal="cobertura" aria-haspopup="dialog">Tem na minha área?</button>
                             <button class="btn skip">Pular</button>
                         </div>
                     </div>
+                    <div class="left-tap-area" aria-label="Slide anterior" role="button" tabindex="0"></div>
                     <div class="right-tap-area" aria-label="Próximo slide" role="button" tabindex="0"></div>
                 </div>
                 
@@ -729,8 +730,8 @@
                             <div class="icon-wrapper">
                                 <img src="https://cdn-icons-png.flaticon.com/512/3059/3059554.png" alt="Ícone de conexão">
                             </div>
-                            <h1>Sua revolução digital começa aqui</h1>
-                            <p>Junte-se a milhares de clientes satisfeitos e experimente o futuro das telecomunicações</p>
+                            <h1>Junte-se a quem nunca fica offline</h1>
+                            <p>Vem pra LEO TELECON e aproveita uma conexão que não te abandona.</p>
                         </div>
                         
                         <div class="frame-footer">
@@ -739,11 +740,12 @@
                                 <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 2" tabindex="0"></button>
                                 <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 3" tabindex="0"></button>
                                 <button class="indicator" role="tab" aria-selected="false" aria-label="Slide 4" tabindex="0"></button>
-                                <button class="indicator active" role="tab" aria-selected="true" aria-label="Slide 5" tabindex="0"></button>
+                                <button class="indicator filled" role="tab" aria-selected="true" aria-label="Slide 5" tabindex="0"></button>
                             </div>
-                            <button class="btn" data-modal="assinar" aria-haspopup="dialog">Quero ser Leo Telecon</button>
+                            <button class="btn" data-modal="assinar" aria-haspopup="dialog">Vem que dá certo!</button>
                         </div>
                     </div>
+                    <div class="left-tap-area" aria-label="Slide anterior" role="button" tabindex="0"></div>
                 </div>
             </div>
         </div>
@@ -761,7 +763,7 @@
             <div class="modal-content">
                 <!-- O conteúdo será inserido dinamicamente via JavaScript -->
             </div>
-            <button class="modal-btn">Entendido</button>
+            <button class="modal-btn">Falar no WhatsApp</button>
         </div>
     </div>
 
@@ -773,6 +775,7 @@
             const nextButtons = document.querySelectorAll('.btn:not(.skip)');
             const skipButtons = document.querySelectorAll('.btn.skip');
             const rightTapAreas = document.querySelectorAll('.right-tap-area');
+            const leftTapAreas = document.querySelectorAll('.left-tap-area');
             const modalOverlay = document.querySelector('.modal-overlay');
             const modalClose = document.querySelector('.modal-close');
             const modalContent = document.querySelector('.modal-content');
@@ -781,27 +784,30 @@
             const tapFeedback = document.getElementById('tapFeedback');
             const loadingIndicator = document.getElementById('loadingIndicator');
             
+            // Número de WhatsApp para redirecionamento
+            const whatsappNumber = "5500000000000"; // Substitua pelo número real com código do país
+            
             // Conteúdo dos modais
             const modalData = {
                 internet: {
-                    title: "Nossa Rede de Internet",
-                    content: "<p><strong>Velocidades de 100Mbps a 1Gbps</strong> com tecnologia de fibra óptica pura (FTTH).</p><p>• Ping ultrabaixo para jogos online</p><p>• Upload simétrico (mesma velocidade de download)</p><p>• Estabilidade 99,9% do tempo</p><p>• Wi-Fi 6 incluso nos planos acima de 300Mbps</p>"
+                    title: "Internet que não deixa na mão",
+                    content: "<p><strong>Velocidades que dão conta do recado</strong> com fibra óptica de verdade.</p><p>• Ping baixinho pra jogar sem travar</p><p>• Upload e download na mesma velocidade</p><p>• Conexão firme o tempo todo</p><p>• Wi-Fi que pega na casa toda</p>"
                 },
                 suporte: {
-                    title: "Suporte Técnico",
-                    content: "<p><strong>Atendimento humano 24/7</strong> por telefone, chat e WhatsApp.</p><p>• Tempo médio de resposta: 2 minutos</p><p>• Agendamento de visita técnica em até 24h</p><p>• Equipe certificada e treinada</p><p>• Monitoramento proativo da sua conexão</p>"
+                    title: "Suporte que não enrola",
+                    content: "<p><strong>Atendimento com gente de verdade</strong> a qualquer hora do dia ou da noite.</p><p>• Resposta em poucos minutos</p><p>• Visita técnica no mesmo dia</p><p>• Equipe que entende do assunto</p><p>• A gente já sabe quando sua internet cai</p>"
                 },
                 planos: {
-                    title: "Nossos Planos",
-                    content: "<p><strong>Planos residenciais e empresariais</strong> com preços competitivos.</p><p>• Residencial Básico: 100Mbps - R$ 89,90/mês</p><p>• Residencial Premium: 300Mbps - R$ 129,90/mês</p><p>• Gamer: 500Mbps + prioridade - R$ 179,90/mês</p><p>• Empresarial: 1Gbps + IP fixo - R$ 399,90/mês</p>"
+                    title: "Planos que cabem no bolso",
+                    content: "<p><strong>Opções pra todo tipo de uso e orçamento</strong>, sem pegadinha.</p><p>• Plano Básico: 100Mega - R$ 89,90/mês</p><p>• Plano Família: 300Mega - R$ 129,90/mês</p><p>• Plano Gamer: 500Mega - R$ 179,90/mês</p><p>• Plano Negócios: 1Giga - R$ 399,90/mês</p>"
                 },
                 cobertura: {
-                    title: "Área de Cobertura",
-                    content: "<p><strong>Atendemos em toda a região metropolitana</strong> com expansão contínua.</p><p>• Cobertura 100% na capital</p><p>• 85% nos bairros periféricos</p><p>• Expansão para 5 cidades vizinhas em 2024</p><p>• Consulta de disponibilidade online</p>"
+                    title: "Chegamos onde os outros não chegam",
+                    content: "<p><strong>Levando internet boa pra toda região</strong>, até onde os outros não vão.</p><p>• Cobertura completa na cidade</p><p>• Atendemos os bairros mais distantes</p><p>• Chegando em mais 5 cidades em 2024</p><p>• Consulte disponibilidade no seu endereço</p>"
                 },
                 assinar: {
-                    title: "Assine Agora",
-                    content: "<p><strong>Processo simples e rápido</strong> para você começar a usar.</p><p>• Instalação gratuita</p><p>• Sem fidelidade</p><p>• Equipamentos inclusos</p><p>• Primeiro mês com 50% de desconto</p><p>• Suporte prioritário nos primeiros 30 dias</p>"
+                    title: "Vem que dá certo!",
+                    content: "<p><strong>Processo rápido e sem burocracia</strong> pra você já sair navegando.</p><p>• Instalação gratuita e rápida</p><p>• Sem fidelidade que prende você</p><p>• Equipamentos inclusos no pacote</p><p>• Primeiro mês com metade do preço</p><p>• Atendimento VIP nos primeiros 30 dias</p>"
                 }
             };
             
@@ -809,6 +815,7 @@
             const totalFrames = frames.length;
             let autoPlayInterval;
             let isAnimating = false;
+            let currentModalType = "";
             
             // Pré-carregar imagens
             preloadImages();
@@ -866,8 +873,8 @@
                     updateAriaAttributes();
                 }, 300);
                 
-                // Atualizar indicadores
-                updateIndicators();
+                // Atualizar indicadores - MODIFICADO para preenchimento simples
+                updateSimpleIndicators();
                 
                 // Reiniciar autoplay
                 resetAutoPlay();
@@ -880,13 +887,13 @@
                 });
             }
             
-            // Atualizar indicadores
-            function updateIndicators() {
+            // Atualizar indicadores com preenchimento simples (apenas o atual)
+            function updateSimpleIndicators() {
                 indicators.forEach((indicator, index) => {
                     if (index === currentIndex) {
-                        indicator.classList.add('active');
+                        indicator.classList.add('filled');
                     } else {
-                        indicator.classList.remove('active');
+                        indicator.classList.remove('filled');
                     }
                 });
             }
@@ -968,7 +975,7 @@
                 }
             }
             
-            // Navegação por toque na área direita
+            // Navegação por toque na área direita (próximo)
             rightTapAreas.forEach(area => {
                 area.addEventListener('click', (e) => {
                     // Mostrar feedback visual
@@ -985,6 +992,28 @@
                         e.preventDefault();
                         if (currentIndex < totalFrames - 1) {
                             updateCarousel(currentIndex + 1);
+                        }
+                    }
+                });
+            });
+            
+            // Navegação por toque na área esquerda (anterior)
+            leftTapAreas.forEach(area => {
+                area.addEventListener('click', (e) => {
+                    // Mostrar feedback visual
+                    showTapFeedback(e);
+                    
+                    if (currentIndex > 0) {
+                        updateCarousel(currentIndex - 1, 'prev');
+                    }
+                });
+                
+                // Navegação por teclado
+                area.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        if (currentIndex > 0) {
+                            updateCarousel(currentIndex - 1, 'prev');
                         }
                     }
                 });
@@ -1058,10 +1087,14 @@
             });
             
             function openModal(type) {
+                currentModalType = type;
                 const data = modalData[type];
                 modalTitle.textContent = data.title;
                 modalContent.innerHTML = data.content;
                 modalOverlay.classList.add('active');
+                
+                // Atualizar texto do botão do modal
+                modalBtn.textContent = "Falar no WhatsApp";
                 
                 // Atualizar atributos ARIA
                 modalOverlay.setAttribute('aria-hidden', 'false');
@@ -1093,8 +1126,42 @@
                 }
             }
             
+            // Redirecionamento para WhatsApp
+            modalBtn.addEventListener('click', function() {
+                let message = "";
+                
+                // Personalizar a mensagem com base no tipo de modal
+                switch(currentModalType) {
+                    case "internet":
+                        message = "Olá! Quero saber mais sobre a internet que não deixa na mão da Leo Telecon.";
+                        break;
+                    case "suporte":
+                        message = "Olá! Preciso de ajuda com minha internet da Leo Telecon.";
+                        break;
+                    case "planos":
+                        message = "Olá! Quero conhecer os planos da Leo Telecon que cabem no meu bolso.";
+                        break;
+                    case "cobertura":
+                        message = "Olá! Quero saber se a Leo Telecon tem cobertura no meu endereço.";
+                        break;
+                    case "assinar":
+                        message = "Olá! Quero ser cliente da Leo Telecon. Vamos conversar?";
+                        break;
+                    default:
+                        message = "Olá! Quero saber mais sobre a Leo Telecon.";
+                }
+                
+                // Codificar a mensagem para URL
+                const encodedMessage = encodeURIComponent(message);
+                
+                // Redirecionar para WhatsApp
+                window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+                
+                // Fechar o modal após o redirecionamento
+                closeModal();
+            });
+            
             modalClose.addEventListener('click', closeModal);
-            modalBtn.addEventListener('click', closeModal);
             
             modalOverlay.addEventListener('click', function(e) {
                 if (e.target === modalOverlay) {
